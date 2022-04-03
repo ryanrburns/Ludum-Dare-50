@@ -42,6 +42,7 @@ public class ShakeTransform : MonoBehaviour
     private IEnumerator Shake()
     {
         _timer = 0f;
+        _startPos = transform.position;
 
         image.color = Color.red;
         

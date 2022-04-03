@@ -36,16 +36,22 @@ public class TaxForm : MonoBehaviour
     bool completedMaritalStatus;
     bool completedEntity;
     bool completedBirthdate;
-    //bool completedIsClone = true;
+    bool completedIsClone = true;
     bool completedSpecies;
 
     [SerializeField] Button submitButton;
     [SerializeField] TMP_Text finalSignature;
 
+    AudioPlayer audioPlayer;
+
+    private void Awake()
+    {
+        audioPlayer = FindObjectOfType<AudioPlayer>();
+    }
+
     void Start()
     {
         MakeArrays();
-        
         Randomize();
     }
 
@@ -61,7 +67,7 @@ public class TaxForm : MonoBehaviour
         CheckStudentText();
         CheckWorkText();
         CheckMaritalToggleGroup();
-        //CheckEntityToggleGroup();
+        CheckEntityToggleGroup();
         CheckBirthdateToggle();
         CheckSpeciesDropdown();
 
@@ -76,8 +82,6 @@ public class TaxForm : MonoBehaviour
         answerStudent.text = UnityEngine.Random.Range(1000, 4000).ToString();
         answerWage.text = UnityEngine.Random.Range(12000, 60000).ToString();
         answerWork.text = UnityEngine.Random.Range(800, 1500).ToString();
-
-
     }
 
     private void MakeArrays()
@@ -95,55 +99,63 @@ public class TaxForm : MonoBehaviour
     {
         if (!completedSocial) 
         {
-            submitButton.GetComponent<ShakeTransform>().StartButtonShake();
+            ExecuteWrong();
             return; 
         }
         if (!completedIncome) 
         {
-            submitButton.GetComponent<ShakeTransform>().StartButtonShake();
+            ExecuteWrong();
             return; 
         }
         if (!completedStudent) 
         {
-            submitButton.GetComponent<ShakeTransform>().StartButtonShake();
+            ExecuteWrong();
             return; 
         }
         if (!completedWork) 
         {
-            submitButton.GetComponent<ShakeTransform>().StartButtonShake();
+            ExecuteWrong();
             return; 
         }
         if (!completedMaritalStatus) 
         {
-            submitButton.GetComponent<ShakeTransform>().StartButtonShake();
+            ExecuteWrong();
             return; 
         }
         if (!completedEntity) 
         {
-            submitButton.GetComponent<ShakeTransform>().StartButtonShake();
-            return; 
+            ExecuteWrong();
+            return;
         }
         if (!completedBirthdate) 
         {
-            submitButton.GetComponent<ShakeTransform>().StartButtonShake();
+            ExecuteWrong();
             return; 
         }
-        if (!completedSpecies) 
+        if (!completedSpecies)
         {
-            submitButton.GetComponent<ShakeTransform>().StartButtonShake();
-            return; 
+            ExecuteWrong();
+            return;
         }
         else
         {
-            submitButton.gameObject.SetActive(false);
-            Destroy(submitButton);
-            finalSignature.gameObject.SetActive(true);
+            ExecuteRight();
         }
     }
 
-    private void ShakeButton()
+    private void ExecuteRight()
     {
+        submitButton.gameObject.SetActive(false);
+        Destroy(submitButton);
+        finalSignature.gameObject.SetActive(true);
+        audioPlayer.PlayRightClip();
+    }
 
+    private void ExecuteWrong()
+    {
+        audioPlayer.PlayWrongClip();
+        submitButton.GetComponent<ShakeTransform>().StartButtonShake();
+        return;
     }
 
     private void CheckSocialText()

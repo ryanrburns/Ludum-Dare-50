@@ -6,11 +6,16 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    AudioPlayer audioPlayer;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        audioPlayer = FindObjectOfType<AudioPlayer>();
+    }
+
+    private void Start()
+    {
+        audioPlayer.PlayMusicClip();
     }
 
     // Update is called once per frame
