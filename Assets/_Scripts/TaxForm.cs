@@ -26,6 +26,9 @@ public class TaxForm : MonoBehaviour
     [SerializeField] TMP_Text answerStudent;
     [SerializeField] TMP_Text answerWork;
 
+    private string[] possibleSpecies = new string[3];
+    private string[] possiblePlanets = new string[3];
+
     bool completedSocial;
     bool completedIncome;
     bool completedStudent;
@@ -33,19 +36,22 @@ public class TaxForm : MonoBehaviour
     bool completedMaritalStatus;
     bool completedEntity;
     bool completedBirthdate;
-    bool completedIsClone = true;
+    //bool completedIsClone = true;
     bool completedSpecies;
 
-    // Start is called before the first frame update
+    [SerializeField] Button submitButton;
+    [SerializeField] TMP_Text finalSignature;
+
     void Start()
     {
+        MakeArrays();
         
+        Randomize();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void Compute()
@@ -55,27 +61,89 @@ public class TaxForm : MonoBehaviour
         CheckStudentText();
         CheckWorkText();
         CheckMaritalToggleGroup();
-        CheckEntityToggleGroup();
+        //CheckEntityToggleGroup();
         CheckBirthdateToggle();
         CheckSpeciesDropdown();
 
         ComputeWin();
     }
 
+    private void Randomize()
+    {
+        int randomArrayValue = UnityEngine.Random.Range(0, 3);
+        answerSocial.text = possiblePlanets[randomArrayValue];
+
+        answerStudent.text = UnityEngine.Random.Range(1000, 4000).ToString();
+        answerWage.text = UnityEngine.Random.Range(12000, 60000).ToString();
+        answerWork.text = UnityEngine.Random.Range(800, 1500).ToString();
+
+
+    }
+
+    private void MakeArrays()
+    {
+        possibleSpecies[0] = "Space Centaur";
+        possibleSpecies[1] = "Twi'lek";
+        possibleSpecies[2] = "Ygrlllvkar";
+
+        possiblePlanets[0] = "Planet Volton";
+        possiblePlanets[1] = "Planet Ryloth";
+        possiblePlanets[2] = "Planet Whoopsie";
+    }
+
     private void ComputeWin()
     {
-        if (!completedSocial) { return; }
-        if (!completedIncome) { return; }
-        if (!completedStudent) { return; }
-        if (!completedWork) { return; }
-        if (!completedMaritalStatus) { return; }
-        if (!completedEntity) { return; }
-        if (!completedBirthdate) { return; }
-        if (!completedSpecies) { return; }
+        if (!completedSocial) 
+        {
+            submitButton.GetComponent<ShakeTransform>().StartButtonShake();
+            return; 
+        }
+        if (!completedIncome) 
+        {
+            submitButton.GetComponent<ShakeTransform>().StartButtonShake();
+            return; 
+        }
+        if (!completedStudent) 
+        {
+            submitButton.GetComponent<ShakeTransform>().StartButtonShake();
+            return; 
+        }
+        if (!completedWork) 
+        {
+            submitButton.GetComponent<ShakeTransform>().StartButtonShake();
+            return; 
+        }
+        if (!completedMaritalStatus) 
+        {
+            submitButton.GetComponent<ShakeTransform>().StartButtonShake();
+            return; 
+        }
+        if (!completedEntity) 
+        {
+            submitButton.GetComponent<ShakeTransform>().StartButtonShake();
+            return; 
+        }
+        if (!completedBirthdate) 
+        {
+            submitButton.GetComponent<ShakeTransform>().StartButtonShake();
+            return; 
+        }
+        if (!completedSpecies) 
+        {
+            submitButton.GetComponent<ShakeTransform>().StartButtonShake();
+            return; 
+        }
         else
         {
-            Debug.Log("FUCKING WINNING");
+            submitButton.gameObject.SetActive(false);
+            Destroy(submitButton);
+            finalSignature.gameObject.SetActive(true);
         }
+    }
+
+    private void ShakeButton()
+    {
+
     }
 
     private void CheckSocialText()
@@ -138,7 +206,7 @@ public class TaxForm : MonoBehaviour
     {
         if (toggleGroupMaritalStatus.AnyTogglesOn() == true)
         {
-            if (toggleGroupMaritalStatus.GetFirstActiveToggle().ToString() == "Single (UnityEngine.UI.Toggle)")
+            if (toggleGroupMaritalStatus.GetFirstActiveToggle().ToString() == "Married (UnityEngine.UI.Toggle)")
             {
                 completedMaritalStatus = true;
                 Debug.Log("completedMaritalStatus: True");
