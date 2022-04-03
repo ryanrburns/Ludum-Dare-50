@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: a6f964fd0f0215d48b52f17267edbd25
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Jason Signature
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 01ebf2a88eb7a8c41b7cb3cbdfbacab1, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

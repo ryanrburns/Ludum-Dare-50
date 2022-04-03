@@ -7,6 +7,7 @@ using System;
 
 public class TaxForm : MonoBehaviour
 {
+    [Header("Tax Form Fields")]
     [SerializeField] TMP_InputField textFieldSocial;
     [SerializeField] TMP_InputField textFieldIncome;
     [SerializeField] TMP_InputField textFieldStudent;
@@ -18,6 +19,12 @@ public class TaxForm : MonoBehaviour
     [SerializeField] Toggle toggleIsClone;
 
     [SerializeField] TMP_Dropdown dropdownSpecies;
+
+    [Header("Answer Fields from Desk")]
+    [SerializeField] TMP_Text answerSocial;
+    [SerializeField] TMP_Text answerWage;
+    [SerializeField] TMP_Text answerStudent;
+    [SerializeField] TMP_Text answerWork;
 
     bool completedSocial;
     bool completedIncome;
@@ -73,7 +80,7 @@ public class TaxForm : MonoBehaviour
 
     private void CheckSocialText()
     {
-        if (textFieldSocial.text == "0")
+        if (textFieldSocial.text == answerSocial.text)
         {
             completedSocial = true;
             Debug.Log("completedSocial: True");
@@ -88,7 +95,7 @@ public class TaxForm : MonoBehaviour
 
     private void CheckIncomeText()
     {
-        if (textFieldIncome.text == "0")
+        if (textFieldIncome.text == answerWage.text)
         {
             completedIncome = true;
             Debug.Log("completedIncome: True");
@@ -101,7 +108,7 @@ public class TaxForm : MonoBehaviour
     }
     private void CheckStudentText()
     {
-        if (textFieldStudent.text == "0")
+        if (textFieldStudent.text == answerStudent.text)
         {
             completedStudent = true;
             Debug.Log("completedStudent: True");
@@ -115,7 +122,7 @@ public class TaxForm : MonoBehaviour
 
     private void CheckWorkText()
     {
-        if (textFieldWork.text == "0")
+        if (textFieldWork.text == answerWork.text)
         {
             completedWork = true;
             Debug.Log("completedWork: True");
