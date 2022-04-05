@@ -44,6 +44,8 @@ public class TaxForm : MonoBehaviour
 
     AudioPlayer audioPlayer;
 
+    int randomArrayValue;
+
     private void Awake()
     {
         audioPlayer = FindObjectOfType<AudioPlayer>();
@@ -76,7 +78,7 @@ public class TaxForm : MonoBehaviour
 
     private void Randomize()
     {
-        int randomArrayValue = UnityEngine.Random.Range(0, 3);
+        randomArrayValue = UnityEngine.Random.Range(0, 3);
         answerSocial.text = possiblePlanets[randomArrayValue];
 
         answerStudent.text = UnityEngine.Random.Range(1000, 4000).ToString();
@@ -160,10 +162,25 @@ public class TaxForm : MonoBehaviour
 
     private void CheckSocialText()
     {
-        if (textFieldSocial.text == answerSocial.text)
+        if (textFieldSocial.text.ToUpper() == answerSocial.text.ToUpper())
         {
             completedSocial = true;
             Debug.Log("completedSocial: True");
+        }
+        else if (textFieldSocial.text.ToUpper() == "VOLTON" && randomArrayValue == 0)
+        {
+            completedSocial = true;
+            Debug.Log("completedSocial: True (NO PLANET TEXT)");
+        }
+        else if (textFieldSocial.text.ToUpper() == "RYLOTH" && randomArrayValue == 1)
+        {
+            completedSocial = true;
+            Debug.Log("completedSocial: True (NO PLANET TEXT)");
+        }
+        else if (textFieldSocial.text.ToUpper() == "WHOOPSIE" && randomArrayValue == 2)
+        {
+            completedSocial = true;
+            Debug.Log("completedSocial: True (NO PLANET TEXT)");
         }
         else
         {
